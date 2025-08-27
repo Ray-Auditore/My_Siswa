@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mysiswa/Homepage.dart';
-import 'package:mysiswa/Register.dart';
+import 'package:mysiswa/login.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController usernameController = TextEditingController();
+class _RegisterState extends State<Register> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
   bool _obsecured = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("login", style: TextStyle()),
+        title: Text("Register", style: TextStyle()),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: Center(
@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Login ke akun anda"),
+              Text("Register ke akun anda"),
               SizedBox(height: 25),
               TextField(
                 controller: usernameController,
@@ -43,6 +43,26 @@ class _LoginState extends State<Login> {
                 obscureText: _obsecured,
                 decoration: InputDecoration(
                   labelText: "Password",
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obsecured = !_obsecured;
+                      });
+                    },
+                    icon: Icon(
+                      _obsecured ? Icons.visibility_off : Icons.visibility,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 25),
+              TextField(
+                controller: passwordController,
+                obscureText: _obsecured,
+                decoration: InputDecoration(
+                  labelText: "Confirm Password",
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
                   suffixIcon: IconButton(
@@ -79,15 +99,15 @@ class _LoginState extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Belum punya akun?"),
+                  Text("Sudah punya akun?"),
                   TextButton(
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Register()),
+                        MaterialPageRoute(builder: (context) => Login()),
                       );
                     },
-                    child: Text("Sign Up"),
+                    child: Text("Login"),
                   ),
                 ],
               ),
